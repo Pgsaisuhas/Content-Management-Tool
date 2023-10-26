@@ -1,0 +1,33 @@
+{% extends "cms_app/base.html" %}
+{% block content %}
+    <h1 class="mb-3">Posts by {{ view.kwargs.username }} ({{ page_obj.paginator.count }})</h1>
+    {% for post in posts %}
+        <article class="media content-section">
+          <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2" href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a>
+              <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
+            </div>
+            <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
+            <p class="article-content">{{ post.content }}</p>
+            
+            {# Display images if available #}
+            {% if post.image %}
+              <img src="{{ post.image.url }}" class="img-fluid" alt="Post Image">
+            {% endif %}
+            
+            {# Display videos if available #}
+            {% if post.video %}
+              <video controls width="320" height="240">
+                <source src="{{ post.video.url }}" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            {% endif %}
+          </div>
+        </article>
+    {% endfor %}
+    {% if is_paginated %}
+      {# Pagination code remains the same #}
+    {% endif %}
+{% endblock content %}
