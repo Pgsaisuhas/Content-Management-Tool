@@ -17,13 +17,13 @@
       <p class="article-content">{{ object.content }}</p>
       {# Display images and videos if available #}
       {% if object.image %}
-          <img src="{{ object.image.url }}" class="img-fluid" alt="Post Image">
+        <img src="{{ object.image.url }}" class="img-fluid" alt="Post Image">
       {% endif %}
       {% if object.video %}
-          <video controls width="320" height="240">
-              <source src="{{ object.video.url }}" type="video/mp4">
-              Your browser does not support the video tag.
-          </video>
+        <video controls width="540" height="340">
+          <source src="{{ object.video.url }}" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
       {% endif %}
     </div>
   </article>
